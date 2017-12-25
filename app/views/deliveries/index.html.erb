@@ -1,0 +1,209 @@
+<div class="wrap">
+  <nav class="nav-bar navbar-default" role="navigation">
+      <div id ="top-menu" class="container-fluid active">
+          <%= render 'layouts/logo' %>
+          <%= render 'layouts/user_nav' %>
+      </div>      
+  </nav>
+  <%= render 'layouts/user_side_nav' %>
+  
+  <!--Body content-->
+  <div class="content">
+    <div class="top-bar" style="background: white !important; display: block;">       
+      <a href="#menu" class="side-menu-link burger"> 
+        <span class='burger_inside' id='bgrOne'></span>
+        <span class='burger_inside' id='bgrTwo'></span>
+        <span class='burger_inside' id='bgrThree'></span>
+      </a>      
+    </div>
+    <section class="content-inner">
+          <% if user_signed_in? %>
+                
+                <h2 style="padding-bottom: 20px;"></h2>
+                <div class="row" style="margin-top:-30px;">
+                  <div class="col-lg-12">
+                    <div class="row">
+                    <div style="background-color:transparent; height:100px">
+                      <div class="col-1g-1 tile-icon " style="height:100px; width:50%; float:left; border-top: 1px solid #eeeeee; border-left: 1px solid #eeeeee; border-right: 1px solid #cccccc; color: #b0b0b0;">Delivery
+                        </div>
+
+                      <div class="col-1g-1 tile-icon " style="background-color:#0f0; height:100px; width:50%; float:left; border-left: 0px solid;">
+                          <a href="paqs/pickup" class="cust-block-icons">Pickup</a>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row" style="display: none;">
+                    <div style="background-color:transparent; height:100px">
+                      <div class="col-1g-1 tile-icon " style="height:100px; width:50%; float:left;"><a href="/" class="cust-block-icons" style="color: #b0b0b0 !important;"><i class=" fa fa-truck "></i></a>
+                          
+                        </div>
+                      <div class="col-1g-1 tile-icon " style="background-color:#0f0; height:100px; width:50%; float:left;">
+                          <a href="paqs/pickup" class="cust-block-icons""><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                        <% if Schedule.exists?() %>
+                          <% for schedule in @schedules %>
+                          <% @mySched = schedule.delivery_id %>
+                          <% end %> 
+                          <% end  %>
+
+                    
+                        <% if Order.exists?(user_id: current_user.id) %>
+                              <% i = 0 %>
+                              <hr><table class="table">
+                              <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <% if Delivery.exists?(@mySched) %>
+                                <td><span><%= link_to "Update Delivery", schedules_path, class: "btn btn-default btn-xs" %></span></td> 
+                              <% end %>
+                              </tr>
+                              <tr>
+                              <th>Cust# <%= current_user.packs_num %></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              </tr>
+                                  <tr><h2 style="text-align: center;">New Order Available For Delivery</h2></tr>
+                                    <th></th>
+                                    <th>Description</th>
+                                    <th>Size</th>
+                                    <th>Schedule</th>
+                                    
+                                      <% if Subscription.exists?(user_id: current_user.id) %>
+                                        <% for subscription in @subscriptions %>
+                                            <%
+                                            @mySub = subscription.id 
+                                            @myPlan = subscription.plan_id
+                                            %> 
+                                        <% end %>
+                                      <% end %>
+                                            <%  @mySub %>
+                                            <% @myPlan %>
+
+                            <% for order in @order %>
+
+                              <tr>
+                              <td></td>
+                              <td><h4><%= order.order_description %></h4></td>
+                              <td><h4><%= order.order_size %></h4></td>
+                               <% @oid = order.id %>
+                               <% if !Delivery.exists?(order_id: order.id) && Order.find(order.id) %>
+                                    
+                                     <td><%= link_to "Schedule Delivery", "orders/#{@oid}/deliveries", class: "btn btn-default btn-xs" %></td> 
+                                   
+                                <% else %>
+                                <% i += 1 %>
+                                       <td>
+                                       
+                                        Delivery Scheduled
+                                      </td>
+                                      <% if i == 10 %>
+                                      <% break %>
+                                      <% end %>
+                                      
+                                
+                                <% end %>
+                              
+                           
+
+
+                              <% end %>
+                              </tr>
+                               </table>
+                               
+                        <% else %>
+                            
+                            <div class="cust-mob-body-text">
+                            <hr>
+                             <h3 style="color: #2388f9 !important;">No orders available at this time.</h3>
+                             <hr>
+                            <p class="mobile-para">Online purchases sent to your NextPakk address will show up here when they're ready
+                            to be delivered.</p>
+                            </div>
+                        <% end %>
+                  <% else %>
+                      <br /><br /><br /><div class="mobile-body">
+                      <%= image_tag "https://s3.amazonaws.com/nextpakkweb/delivery-bkg-install-hdr3.jpg", class: "img-responsive" %>
+                         
+
+
+
+                        <br /><h2 style="text-align: center;"><strong>Simple, convenient delivery on your time!</strong></h2>
+                        
+                        <h4>No more <strong>missed delivery slips</strong> or <strong>stolen packages!</strong>
+                          
+                        </h4>
+
+
+                        
+                        <h4>NextPakk the new sorry we missed you.</h4>
+                        <h4>Schedule delivery to your home <strong>7 days a week</strong> from <strong>6pm to midnight.</strong></h4>
+                        <span style="text-align: center;"><h3><strong>Sign Up Today and Set-up a Free Account!</strong></h3></span>
+                      </div>
+                      <div class="row" style="margin:0px;">
+                    <div class="col-lg-12">
+                      <div class="row">
+                      <div style="background-color: transparent; height:50px">
+                        <a href="/users/sign_in"><span class="col-1g-1 text-center" style="background-color:white; height:50px; width:48%; float:left; line-height: 50px; color: #000033; border-radius: 10px; border: 2px solid #eaeaea !important; font-size: 20px; cursor: inherit; display: inline-block; margin-right: 2px;">
+                            <span class="glyphicon glyphicon-log-in" style="font-size: 20px;"></span> Login
+                          </span></a>
+                        <a href="/users/sign_up"><span class="col-1g-1 text-center" style="background-color:white; height:50px; width:48%; float:left; line-height: 50px; color: #000033; border-radius: 10px; border: 2px solid #eaeaea !important; font-size: 20px; cursor: inherit; display: inline-block; margin-left: 2px;">
+                            <span class="glyphicon glyphicon-pencil" style="font-size: 20px;"></span> Signup
+                          </span></a>
+                        
+                        </div>
+                      </div>
+                    </div>
+                      <div class="container" style="display: none;">
+                    
+                        <div class="row">
+                          <div class="col-xs-6">
+                              <%= link_to "login", new_user_session_path, class: "btn btn-info btn-lg" %>
+                            </div>
+                          <div class="col-xs-6">
+                              <%= link_to "sign up", new_user_registration_path, class: "btn btn-info btn-lg " %>
+                            </div>
+                        </div>
+                      </div>
+                  <% end %>
+                </div>
+                <br />
+                      <% if user_signed_in? && current_user.admin? %>
+                <table class="table table-hover table-condensed" style="display: none;">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Address</th>
+                      <th>Phone</th>
+                      <th>Size</th>
+                        <th colspan="2"></th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% @deliveries.each do |delivery| %>
+                      <tr>
+                        <td><%= link_to delivery.name, delivery %></td>
+                        <td><%= link_to delivery.address, "http://maps.google.com/?q=#{delivery.address}" %></td>
+                        <td><%= delivery.phone %></td>
+                        <td><%= link_to delivery.size, delivery.size %></td> 
+                          <td><%= link_to 'Edit', edit_delivery_path(delivery), class: "btn btn-link" %></td>
+                          <td><%= link_to 'Destroy', delivery, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></td>
+                        <% end %>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+
+    </section>
+  </div>  
+  
+</div>
+

@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="tile-icon-container" style="background: #0069ff !important;">
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+                  <div class="box">             
+                    <div class="icon">
+                      <div class="image"><i class="glyphicon glyphicon-shopping-cart glyph-lrg-cntr" style=""></i></div>
+
+<div class="col-1g-12">
+                    <div class="col-1g-9 tile-icon-sm how-nav-text-container pull-right">
+                      <a href="/" class="cust-block-icons how-nav-text" style="color: white !important; padding: 10px !important;">   close <i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                    </div><br /><br />
+
+                      <div class="info-form">
+                      <br /> <br />
+                      <h3 style="color: white !important;">NextPakk</h3>
+                      <h1 style="color: white !important;">Thank You <%= @user.first_name %>! </h1>
+                      <h3 style="color: white !important;">You will be notified when you package is out for delivery on <%= @schedule.day.strftime("%B %d, %Y") %>.</h3>
+                              
+                          </div>
+                        </div>
+                        <div class="space"></div>
+                      </div> 
+                    </div>
+                    
+  </div>
+
+  </div>
+  <div id="wrapper">
+       <div id="page-wrapper">
+                <div class="container-fluid">
+                    <h2></h2><br />
+                      <div class="mob-body-text">
+
+                      <p></p>
+                          <h1 style="font-size: 18px !important; text-align: left !important;"><strong>RECEIPT</strong></h1>
+
+                          <table class="table">
+                          	<th>Item</th>
+                            <th>Qty</th>
+                            <th>Amount</th>
+                          	
+                          	
+                          	<tr>
+                          		<td style="text-align: left !important;">
+                              <%= @planType.plan_name %><br />
+                              <%= @purchase.description %> Delivery<br />
+                              <%= @planType.plan_info %>
+
+                              </td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                          	
+                            <tr>
+                              <td></td>
+                              <td style="text-align: left !important;" ><%= @purchase.order_qty %></td>
+                              <td style="text-align: left !important;" >$<%= @purchase.amount.to_f.floor / 100 %></td>
+                            </tr>
+                            <tr>
+                            <td style="text-align: left !important;">
+                            <strong>Deliver To:</strong><br />
+                            <%= @delivery.address %>
+                              
+                            </td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                          	
+
+                          </table>
+
+                          <!--p> Your purchases  @purchase.#inspect </p-->
+                      </div>
+                    <!-- /.container-fluid -->
+                  </div>
+        </div><!-- /#page-wrapper -->
+  </div><!-- /#wrapper -->
+<div id="footer" style="background: #0069ff !important;">
+      <div class="container how-nav-container">
+        
+        <div class="col-1g-9 tile-icon-sm how-nav-text-container pull-right">
+          <a href="/" class="cust-block-icons how-nav-text" style="color: white !important;">   close <i class="glyphicon glyphicon-remove"></i></a>
+        </div>  
+      </div>
+</div>

@@ -1,0 +1,17 @@
+<p>Thank You for Your Order</p>
+
+<% @newOrder = Purchase.last %>
+
+<h2>Your NextPakk Order Summary</h2>
+
+<blockquote>
+AMOUNT: <%= @newOrder.amount.to_f / 100 %><br />
+DESCRIPTION: <%= @newOrder.description %><br />
+QTY: <%= @newOrder.order_qty %><br />
+</blockquote>
+
+<blockquote><%= "Click on the purchase link to login for more details." %><h4><a href="http://www.nextpack.delivery">purchase</a></h4></blockquote>
+
+<div >
+
+</div>

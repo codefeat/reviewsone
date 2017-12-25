@@ -1,0 +1,94 @@
+<div class="wrap">
+  <nav class="nav-bar navbar-default" role="navigation">
+      <div id ="top-menu" class="container-fluid active">
+          <%= render 'layouts/logo' %>
+          <%= render 'layouts/user_nav' %>
+      </div>      
+  </nav>
+  <%= render 'layouts/user_side_nav' %>
+  
+  <!--Body content-->
+  <div class="content">
+    <div class="top-bar" style="background: white !important;">       
+      <a href="#menu" class="side-menu-link burger"> 
+        <span class='burger_inside' id='bgrOne'></span>
+        <span class='burger_inside' id='bgrTwo'></span>
+        <span class='burger_inside' id='bgrThree'></span>
+      </a>      
+    </div>
+    <section class="content-inner">
+          <div class="login-panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sign up</h3>
+                    </div>
+                    
+                    <div class="panel-body">
+                       <h2></h2>
+
+                    <% def generate_code(number)
+                      charset = Array('A'..'Z') + Array('2'..'9')
+                      Array.new(number) { charset.sample }.join
+                    end
+
+                    nextpakk = "NP"
+
+                    custNum = nextpakk + generate_code(4)
+                    %>
+
+                    <script language="javascript">
+                        Stripe.setPublishableKey("<%= ENV['STRIPE_TEST_PUBLISHABLE_KEY'] %>");
+                    </script>
+
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {role: "form", class: 'cc_form'}) do |f| %>
+                      <%= devise_error_messages! %>
+
+                     <div class="form-group">
+                        <%= f.label :first_name %>
+                        <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+                      </div>
+                       <div class="form-group">
+                        <%= f.label :last_name %>
+                        <%= f.text_field :last_name, class: "form-control" %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :email %>
+                        <%= f.email_field :email, class: "form-control" %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :zip_code %>
+                        <%= f.text_field :zip_code, class: "form-control" %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :promo_code %>
+                        <%= f.text_field :promo_code, class: "form-control" %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :password %>
+                        <% if @minimum_password_length %>
+                        <em>(<%= @minimum_password_length %> characters minimum)</em>
+                        <% end %>
+                        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+                      </div>
+
+                      <div class="form-group">
+                        <%= f.label :password_confirmation %>
+                        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+                      </div>
+
+                      <div class="form-group">
+                      <%= f.hidden_field :packs_num, :value => custNum %>
+                        <%= f.submit "Sign up", class: "btn btn-info" %>
+                      </div>
+                    <% end %>
+                    <%= render "devise/shared/links" %>
+                </div>
+            </div>
+    </section>
+  </div>  
+  
+</div>
+
+
+
+

@@ -1,0 +1,20 @@
+New NextPakk Purchase 
+
+<% @newOrder = Purchase.last %>
+
+Order Details
+
+ID: <%= @newOrder.id%>
+EMAIL: <%= @newOrder.email %>
+AMOUNT: <%= @newOrder.amount%>
+DESCRIPTION: <%= @newOrder.description%>
+QTY: <%= @newOrder.order_qty %>
+ORDER NUM: <%= @newOrder.order_num %>
+
+
+
+<%= link_to "gonextpakk", "http://www.nextpack.delivery" %>
+
+
+
+

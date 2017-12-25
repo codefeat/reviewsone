@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="bootstrap.min.css" />
+		<link rel="stylesheet" href="sticky.css" />
+	</head>
+
+	<body>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="brand" href="#">EngineerGio's Sticky Bootstrap</a>
+				</div>
+			</div>
+		</div>	
+		<div class="container">
+		  <div class="content">
+
+		    <div class="wrapper">
+		      <div class="proper-content">
+		        <div class="row">
+		        	<div class="span12">
+		        		<div class="pull-right" id="imgZ" style="width:75px; min-height:75px;">
+		<%= image_tag current_user.image, class: "img-responsive img-circle" %>
+</div>
+<div class="pull-left">
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">Deliver</a></li>
+  <li role="presentation"><%= link_to "Pick-up", paqs_pickup_path %></li>
+</ul>
+</div><br /><br /><br />
+<div class="cust-mob-body-text">
+<h2>NextPakk Que</h2>
+<p class="mobile-para">Online purchases sent to your NextPakk
+address will show up here when they're ready
+to be delivered.</p>
+</div>
+
+
+<div class="row">
+	<div class="col-xs-6">
+		<div class="input-group date">
+		  <input class="datepicker form-control" data-date-format="mm/dd/yyyy"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		</div>
+	</div>
+	
+	<div class="col-xs-6">
+  		<div class="form-group">
+      <select class="selectpicker form-control">
+        <optgroup label="Early">
+		      <option>6pm-7pm</option>
+		      <option>7pm-8pm</option>
+		    </optgroup>
+		    <optgroup label="Mid">
+		      <option>8pm-9pm</option>
+		      <option>9pm-10pm</option>
+		    </optgroup>
+		    <optgroup label="Late">
+		      <option>10pm-11pm</option>
+		      <option>11pm-12pm</option>
+		    </optgroup>
+      </select>
+    </div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-2">Button 1</div>
+	<div class="col-md-2">Button 2</div>
+	<div class="col-md-2">Button 3</div>
+	<div class="col-md-2">Button 4</div>
+	<div class="col-md-2">Button 5</div>
+	<div class="col-md-2">Button 6</div>
+</div>
+
+		        	</div>
+		        </div>
+		      </div><!-- /.proper-content -->
+
+		      <div class="push"></div>
+
+		    </div><!-- /.wrapper -->
+
+		    <div class="footer-wrapper">
+					<footer>That's the sticky footer</footer>
+		    </div>
+		  </div>
+		</div>
+	</body>
+</html>
+
+
+
+
+
+

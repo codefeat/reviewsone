@@ -1,0 +1,20 @@
+New NextPakk Delivery
+
+<% @newOrder = Order.last %>
+
+
+Schedule Your NextPakk Delivery
+
+Delivery Details:
+
+Order#: <%= @newOrder.id%>01
+Order Status: Ready for Scheduling
+Qty: <%= @newOrder.order_qty %>
+Order Description: <%= @newOrder.order_description%>
+Order Size: <%= @newOrder.order_size %>
+
+Instructions:
+Login into your account and click on the schedule delivery button and provide the requested information.
+
+<%= link_to "Click here to login in and schedule your delivery", "http://nextpack.herokuapp.com/" %>
+

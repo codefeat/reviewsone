@@ -1,0 +1,61 @@
+<div class="wrap">
+  <nav class="nav-bar navbar-default" role="navigation">
+      <div id ="top-menu" class="container-fluid active">
+          <%= render 'layouts/logo' %>
+          <%= render 'layouts/user_nav' %>
+      </div>      
+  </nav>
+  <%= render 'layouts/user_side_nav' %>
+  
+  <!--Body content-->
+  <div class="content">
+    <div class="top-bar" style="background: white !important;">       
+      <a href="#menu" class="side-menu-link burger"> 
+        <span class='burger_inside' id='bgrOne'></span>
+        <span class='burger_inside' id='bgrTwo'></span>
+        <span class='burger_inside' id='bgrThree'></span>
+      </a>      
+    </div>
+    <section class="content-inner">
+          <div class="login-panel ">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Log in</h3>
+                    </div>
+                    
+                    <div class="panel-body">
+                        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                          <div class="form-group">
+                            <%= f.label :email %>
+                            <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                          </div>
+
+                          <div class="form-group">
+                            <%= f.label :password %>
+                            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+                          </div>
+
+                          <% if devise_mapping.rememberable? -%>
+                            <div class="form-group">
+                              <%= f.check_box :remember_me %>
+                              <%= f.label :remember_me %>
+                            </div>
+                          <% end -%>
+
+                          <div class="form-group">
+                            <%= f.submit "Log in", class: "btn btn-primary" %>
+                          </div>
+                        <% end %>
+                        <%= render "devise/shared/links" %>
+                </div>
+            </div>
+    </section>
+  </div>  
+  
+</div>
+
+
+
+
+
+
+

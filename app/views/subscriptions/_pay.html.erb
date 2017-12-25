@@ -1,0 +1,72 @@
+                    <h2></h2><br />
+                      <%= form_tag charges_path, id: 'chargeForm' do %>
+                      <% if flash[:error].present? %>
+                        <div id="error_explanation">
+                          <p><%= flash[:error] %></p>
+                        </div>
+                        <% if Schedule.exists?(user_id: current_user.id) %>
+                          <% for schedule in @schedules %>
+                            <% 
+                            @myschedule = schedule.id 
+                            %> 
+                          <% end %>
+                        <% end %>
+                        <%= f.hidden_field :schedule_id, value: @mySchedule %>
+                      <% end %>
+                      <!--label class="amount">
+                        <span>Amount: $5.00</span>
+                      </label>
+                    </article-->
+                    <% thisOrdrNum = @delivery.order_id %>
+                    <% thisQty = @order.order_qty %>
+                    <% perPkg = 2 %>
+                    <% subOne = 1 %>
+                    <% thisSubscription = @subscription.plan_id %>
+                    <% if thisSubscription  == 1 %>
+                      <% myFee = @subscription.plan.price_in_cents + thisQty * perPkg * 100 %>
+                      <% else %>
+                      <% myFee = @subscription.plan.price_in_cents  %>
+                      <% planType = 'Subscription' %>
+                    <% end %>
+                    
+                    <script src="https://checkout.stripe.com/checkout.js"></script>
+                    <%= hidden_field_tag 'stripeToken' %>
+                    <%= hidden_field_tag 'amount', myFee - 100 %>
+                    <%= hidden_field_tag 'stripeEmail' %>
+                    <%= hidden_field_tag 'subcriptionPlanId', @subscription.plan_id %>
+                    <%= hidden_field_tag 'planSku', @subscription.plan.sku %>
+                    <%= hidden_field_tag 'planDescrip', @subscription.plan.plan_descrip %>
+                    <%= hidden_field_tag 'pkgFee', myFee %>
+                    <%= hidden_field_tag 'ordrQty', thisQty %>
+                    <%= hidden_field_tag 'orderNum', thisOrdrNum %>
+                    <%= hidden_field_tag 'subsId', thisSubscription %>
+                    
+                    <% if thisSubscription = 1 %>
+                      <button id="btn-buy" type="button" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Pay</button>
+                    <% end %>
+                    <% if thisSubscription > 1 && Purchase.exists?(subscription_id: thisSubscription) %>
+                      <button id="btn-buy" type="button" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Next</button>
+                    <% end %>
+                    <% if thisSubscription > 1 && !Purchase.exists?(subscription_id: thisSubscription) %>
+                      <button id="btn-buy" type="button" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Subscribe</button>
+                    <% end %>
+
+                    <script type="text/javascript">
+                      var handler = StripeCheckout.configure({
+                        key: 'pk_live_3uSmVhCpCZCnXMaZPJ7m9tSc',
+                        token: function(token, arg) {
+                          document.getElementById("stripeToken").value = token.id;
+                          document.getElementById("stripeEmail").value = token.email;
+                          document.getElementById("chargeForm").submit();
+                        }
+                    });
+                      document.getElementById('btn-buy').addEventListener('click', function(e)  {
+                        handler.open({
+                          name: 'NextPakk Delivery',
+                          description : '<%= @subscription.plan.plan_name %> <%= planType %> ($<%= @subscription.plan.plan_price.floor - subOne %>)  + $2/Pkg',
+                          amount: document.getElementById('amount').value 
+                        });
+                        e.preventDefault();
+                      })
+                    </script>
+                  <% end %>

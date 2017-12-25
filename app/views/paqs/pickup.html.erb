@@ -1,0 +1,142 @@
+  <div class="wrap">
+  <nav class="nav-bar navbar-default" role="navigation">
+      <div id ="top-menu" class="container-fluid active">
+           <%= render 'layouts/logo' %>
+          <%= render 'layouts/user_nav' %>
+      </div>      
+  </nav>
+  <%= render 'layouts/user_side_nav' %>
+  
+  <!--Body content-->
+  <div class="content">
+    <div class="top-bar" style="background: white !important; display: block;">       
+      <a href="#menu" class="side-menu-link burger"> 
+        <span class='burger_inside' id='bgrOne'></span>
+        <span class='burger_inside' id='bgrTwo'></span>
+        <span class='burger_inside' id='bgrThree'></span>
+      </a>      
+    </div>
+    <section class="content-inner">
+          <div class="step1" style="margin-top: -55px;">
+                    <h2></h2>
+                    <h2 style="padding-bottom: 20px;"></h2>
+                    <div class="row" style="margin:0px;">
+                      <div class="col-lg-12">
+                        <div class="row">
+                        <div style="background-color:transparent; height:100px">
+                          <div class="col-1g-1 tile-icon " style="height:100px; width:50%; float:left; border-right:  0px solid; color: #2388f9 !important;"><a href="/" class="cust-block-icons">Delivery</a>
+                              
+                            </div>
+
+                          <div class="col-1g-1 tile-icon " style="height:100px; width:50%; float:left; border-top: 1px solid #eeeeee; border-left: 1px solid #eeeeee; border-right: 1px solid #cccccc; color: #b0b0b0;">Pickup
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="display: none;">
+                        <div style="background-color:transparent; height:100px">
+                          <div class="col-1g-1 tile-icon " style="height:100px; width:50%; float:left;"><a href="/" class="cust-block-icons"><i class=" fa fa-truck "></i></a>
+                              
+                            </div>
+                          <div class="col-1g-1 tile-icon " style="background-color:#0f0; height:100px; width:50%; float:left;">
+                              <a href="#" class="cust-block-icons" style="color: #b0b0b0 !important;"><i class="glyphicon glyphicon-thumbs-up"></i></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                          
+                           <hr>
+                          <div class="cust-mob-body-text">
+
+                          <p class="mobile-para">Shedule pick-up of your ready-to-ship package(s). </p>
+                          </div>
+                    <hr>      
+                    <div class="mobile-body">
+
+                    <h4 class="mobile-para" style="text-align: center !important;">What is the size of your package?</h4>
+                    </div>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width: 88% !important; margin: 0 auto !important; padding-left: 6px !important;">
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                          <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                              Small
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+
+                          <div id="imgZ" style="width:120px; min-height:120px; padding-bottom:10px; float: left;">
+                            <%= image_tag "https://s3.amazonaws.com/nextpakkweb/sm-pack-item-sizes.jpg", class: "img-responsive" %>
+                            </div>
+                            <span class="pull-right"><a href="#">$3.99</a></span><br /><br />
+                            <span style="color:black !important;">The package can be carried in one hand.</span><br />
+                            
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                          <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              Medium
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                          <div class="panel-body">
+                          <div id="imgZ" style="width:120px; min-height:120px; padding-bottom:10px; float: left;">
+                            <%= image_tag "https://s3.amazonaws.com/nextpakkweb/md-pack-item-sizes.jpg", class: "img-responsive" %>
+                            </div>
+                            <span class="pull-right"><a href="#">$3.99</a></span><br /><br />
+                            <span style="color:black !important;">Boxes within the laptop to shoebox range.</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                          <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                              Large
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                          <div class="panel-body">
+                          <div id="imgZ" style="width:120px; min-height:120px; padding-bottom:10px; float: left;">
+                            <%= image_tag "https://s3.amazonaws.com/nextpakkweb/lrg-pack-item-sizes.jpg", class: "img-responsive" %>
+                            </div>
+                            <span class="pull-right"><a href="#">$3.99</a></span><br /><br />
+                            <span style="color:black !important; text-align: left !important;">You usually can't carry anything else with it.</span>
+                          </div>
+                        </div>
+                      </div>
+                       <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                          <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                              X-Large
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                          <div class="panel-body">
+                          <div id="imgZ" style="width:120px; min-height:120px; padding-bottom:10px; float: left;">
+                            <%= image_tag "https://s3.amazonaws.com/nextpakkweb/os-pack-item-sizes.jpg", class: "img-responsive" %>
+                            </div>
+                            <span class="pull-right"><a href="#">$7.99</a></span><br /><br />
+                            <span style="color:black !important; text-align: left !important;">Packages requiring two person delivery teams or additional storage may incur additional cost..</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+            </div>
+
+    </section>
+  </div>  
+  
+</div>
+
+

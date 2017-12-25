@@ -1,0 +1,102 @@
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="tile-icon-container">
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+                  <div class="box">             
+                    <div class="icon">
+                      <div class="image"><i class="glyphicon glyphicon-shopping-cart glyph-lrg-cntr"></i></div>
+                      <div class="info-form" >
+                              <form class="form-inline">
+                                      <div class="form-group">
+                                        <br /><label for="exampleInputName2">Full Name</label>
+                                        <input type="text" class="form-control input-sm" id="exampleInputName2" placeholder='<%=current_user.first_name %> <%= current_user.last_name %>' style="width: 70%!important; float: right !important;">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="exampleInputName2">Address1</label>
+                                        <input type="text" class="form-control input-sm" id="exampleInputName2" placeholder="3909 Minnehaha Ave" style="width: 70%!important; float: right !important;">
+                                      </div>
+                                    <% @myaddr = current_user.packs_num %>
+                                      <div class="form-group">
+                                        <label for="exampleInputName2">Address2</label>
+                                        <input type="text" class="form-control input-sm" id="exampleInputName2" placeholder='NextPakk #<%= @myaddr %>' style="width: 70%!important; float: right !important;">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="exampleInputName2">City</label>
+                                        <input type="text" class="form-control input-sm" id="exampleInputName2" placeholder="Minneapolis" style="width: 70%!important; float: right !important;">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="exampleInputName2">State</label>
+                                        <input type="text" class="form-control input-sm" id="exampleInputName2" placeholder="MN" style="width: 70%!important; float: right !important;">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="exampleInputName2">Zip</label>
+                                        <input type="text" class="form-control input-sm" id="exampleInputName2" placeholder="55406" style="width: 70%!important; float: right !important;">
+                                      </div>
+                                  </form>
+                          </div>
+                          <div id="dtFormBkg">
+                                  <form class="form-inline deskTopForm" style="display: none;">
+                                         
+                                      <div class="form-group" style="width: 120%">
+                                        <label for="exampleInputName2">Full Name</label>
+                                        <input type="text" class="form-control" id="exampleInputName2" placeholder='<%=current_user.first_name %> <%= current_user.last_name %>'>
+                                      </div>
+                                      <div class="form-group" style="width: 120%">
+                                        <label for="exampleInputName2">Address1</label>
+                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="3909 Minnehaha Ave" >
+                                      </div>
+                                    <% @myaddr = current_user.packs_num %>
+                                      <div class="form-group" style="width: 120%">
+                                        <label for="exampleInputName2">Address2</label>
+                                        <input type="text" class="form-control" id="exampleInputName2" placeholder='NextPakk #<%= @myaddr %>' >
+                                      </div>
+                                      <div class="form-group" style="width: 120%">
+                                        <label for="exampleInputName2">City</label>
+                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Minneapolis" >
+                                      </div>
+                                      <div class="form-group" style="width: 120%">
+                                        <label for="exampleInputName2">State</label>
+                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="MN" >
+                                      </div>
+                                      <div class="form-group" style="width: 120%">
+                                        <label for="exampleInputName2">Zip</label>
+                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="55406">
+                                      </div>
+                                    </form>
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                      </div> 
+                    </div>
+  </div>
+  </div>
+  <div id="wrapper">
+       <div id="page-wrapper">
+                <div class="container-fluid">
+                    <h2></h2><br />
+                      <div class="mob-body-text">
+                          <h4 style="font-size: 18px !important;"><strong>Use your NextPakk address for your shipping addresss when you shop online</strong></h4>
+                      </div>
+                    <!-- /.container-fluid -->
+                  </div>
+        </div><!-- /#page-wrapper -->
+  </div><!-- /#wrapper -->
+<div id="footer">
+      <div class="container how-nav-container">
+        <div class="col-1g-1 tile-icon how-nav">
+            | | <span class="how-nav-pipe">|</span> | | | |
+        </div>
+        <div class="col-1g-9 tile-icon-sm how-nav-text-container">
+          <a href="/paqs/how4" class="cust-block-icons how-nav-text">   next <i class="glyphicon glyphicon-chevron-right"></i></a>
+        </div>  
+      </div>
+</div>
