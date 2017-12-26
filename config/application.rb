@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module reviewsone
+module Reviewsone
   class Application < Rails::Application
     # the new line added for autoload of lib
     config.autoload_paths += %W(#{config.root}/lib)

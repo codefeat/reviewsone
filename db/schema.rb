@@ -72,16 +72,6 @@ ActiveRecord::Schema.define(version: 20170722132030) do
     t.decimal  "order_qty"
   end
 
-  create_table "delivery_points", force: :cascade do |t|
-    t.string   "biz_name"
-    t.string   "biz_street"
-    t.string   "biz_city"
-    t.string   "biz_state"
-    t.integer  "biz_zip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "order_statuses", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -220,7 +210,6 @@ ActiveRecord::Schema.define(version: 20170722132030) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "zip_code"
     t.string   "zipcode"
     t.string   "promo_code"
   end
@@ -228,25 +217,5 @@ ActiveRecord::Schema.define(version: 20170722132030) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-  create_table "userzipcodes", force: :cascade do |t|
-    t.integer  "zip_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "userzips", force: :cascade do |t|
-    t.integer  "zip_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "zips", force: :cascade do |t|
-    t.string   "zip_code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
 end
