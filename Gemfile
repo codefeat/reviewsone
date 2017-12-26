@@ -43,3 +43,4 @@ gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
 gem 'letter_opener', group: :development
 gem 'seed_dump'
 gem 'rake', '~> 11.3'
+gem 'metainspector'

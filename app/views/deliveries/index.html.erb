@@ -3,6 +3,7 @@
       <div id ="top-menu" class="container-fluid active">
           <%= render 'layouts/logo' %>
           <%= render 'layouts/user_nav' %>
+          <%= render 'layouts/navbarright' %>
       </div>      
   </nav>
   <%= render 'layouts/user_side_nav' %>
@@ -17,6 +18,20 @@
       </a>      
     </div>
     <section class="content-inner">
+<%=
+#url = 'https://www.yelp.com/biz/egg-house-cafe-crystal'
+
+page = MetaInspector.new('https://www.yelp.com/biz/egg-house-cafe-crystal') 
+
+page.parsed
+
+doc = page.parsed
+
+review = doc.css("div.biz-page-actions a")[0]['href']
+
+
+link_to "write a review", "https://yelp.com#{review}", class: "btn-primary btn", style: "color:white;"
+%>
           <% if user_signed_in? %>
                 
                 <h2 style="padding-bottom: 20px;"></h2>
