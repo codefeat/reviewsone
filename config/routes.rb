@@ -69,6 +69,8 @@ Rails.application.routes.draw do
 
   get 'pages/contact'
 
+  get 'pages/index'
+
   get 'orders/:oid/deliveries' => 'deliveries#new'
 
   #match 'users/:id' => 'users#show', via: :get
@@ -87,7 +89,8 @@ Rails.application.routes.draw do
 
   #get 'orders#index'
 
-  root 'deliveries#index'
+  #root 'deliveries#index'
+  root 'pages#about'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
