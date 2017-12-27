@@ -44,3 +44,8 @@ gem 'letter_opener', group: :development
 gem 'seed_dump'
 gem 'rake', '~> 11.3'
 gem 'metainspector'
+gem 'adminlte-rails'
+gem 'font-awesome-rails'
+gem 'less-rails-bootstrap'
+gem 'therubyracer'
+gem 'jquery-easing-rails'

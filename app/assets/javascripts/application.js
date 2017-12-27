@@ -12,12 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
-
 //= require moment
 //= require bootstrap-datepicker/core
 //= require bootstrap-datetimepicker
 //= require pickers
 //= require turbolinks
+//= require bootstrap.min
+//= require admin-lte
+//= require jquery.easing
+//= require twitter/bootstrap
 //= require_tree .
+
 
 
