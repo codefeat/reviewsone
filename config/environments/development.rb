@@ -45,6 +45,9 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   # required for devise gem
 
+#:domain               => ENV['GMAIL_DOMAIN'],
+    #:user_name            => ENV['GMAIL_USERNAME'],
+    #:password             => ENV['GMAIL_PASSWORD'],
 
 
   config.action_mailer.delivery_method = :smtp
@@ -52,9 +55,9 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :domain               => ENV['GMAIL_DOMAIN'],
-    :user_name            => ENV['GMAIL_USERNAME'],
-    :password             => ENV['GMAIL_PASSWORD'],
+    :domain               => "gmail.com",
+    :user_name            => "lowellfortune@gmail.com",
+    :password             => "R@h!7145@ngm",
     :authentication       => "plain",
     :enable_starttls_auto => true
   }

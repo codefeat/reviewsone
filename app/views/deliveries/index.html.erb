@@ -1,224 +1,307 @@
-<div class="wrap">
-  <nav class="nav-bar navbar-default" role="navigation">
-      <div id ="top-menu" class="container-fluid active">
-          <%= render 'layouts/logo' %>
-          <%= render 'layouts/user_nav' %>
-          <%= render 'layouts/navbarright' %>
-      </div>      
-  </nav>
-  <%= render 'layouts/user_side_nav' %>
-  
-  <!--Body content-->
-  <div class="content">
-    <div class="top-bar" style="background: white !important; display: block;">       
-      <a href="#menu" class="side-menu-link burger"> 
-        <span class='burger_inside' id='bgrOne'></span>
-        <span class='burger_inside' id='bgrTwo'></span>
-        <span class='burger_inside' id='bgrThree'></span>
-      </a>      
-    </div>
-    <section class="content-inner">
-<%=
-#url = 'https://www.yelp.com/biz/egg-house-cafe-crystal'
+<% if user_signed_in? %>
+<%= render 'layouts/rs_header' %>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 
-page = MetaInspector.new('https://www.yelp.com/biz/egg-house-cafe-crystal') 
+  <header class="main-header">
+    <!-- Logo -->
+    <%= render 'layouts/rs_logo' %>
+    <!-- Header Navbar: style can be found in header.less -->
+ <%= render 'layouts/rs_navbar_statictop' %>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+<%= render 'layouts/rs_aside_mainSideBar' %>
 
-page.parsed
-
-doc = page.parsed
-
-review = doc.css("div.biz-page-actions a")[0]['href']
-
-
-link_to "write a review", "https://yelp.com#{review}", class: "btn-primary btn", style: "color:white;"
-%>
-          <% if user_signed_in? %>
-                
-                <h2 style="padding-bottom: 20px;"></h2>
-                <div class="row" style="margin-top:-30px;">
-                  <div class="col-lg-12">
-                    <div class="row">
-                    <div style="background-color:transparent; height:100px">
-                      <div class="col-1g-1 tile-icon " style="height:100px; width:50%; float:left; border-top: 1px solid #eeeeee; border-left: 1px solid #eeeeee; border-right: 1px solid #cccccc; color: #b0b0b0;">Delivery
-                        </div>
-
-                      <div class="col-1g-1 tile-icon " style="background-color:#0f0; height:100px; width:50%; float:left; border-left: 0px solid;">
-                          <a href="paqs/pickup" class="cust-block-icons">Pickup</a>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="row" style="display: none;">
-                    <div style="background-color:transparent; height:100px">
-                      <div class="col-1g-1 tile-icon " style="height:100px; width:50%; float:left;"><a href="/" class="cust-block-icons" style="color: #b0b0b0 !important;"><i class=" fa fa-truck "></i></a>
-                          
-                        </div>
-                      <div class="col-1g-1 tile-icon " style="background-color:#0f0; height:100px; width:50%; float:left;">
-                          <a href="paqs/pickup" class="cust-block-icons""><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                        <% if Schedule.exists?() %>
-                          <% for schedule in @schedules %>
-                          <% @mySched = schedule.delivery_id %>
-                          <% end %> 
-                          <% end  %>
-
-                    
-                        <% if Order.exists?(user_id: current_user.id) %>
-                              <% i = 0 %>
-                              <hr><table class="table">
-                              <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <% if Delivery.exists?(@mySched) %>
-                                <td><span><%= link_to "Update Delivery", schedules_path, class: "btn btn-default btn-xs" %></span></td> 
-                              <% end %>
-                              </tr>
-                              <tr>
-                              <th>Cust# <%= current_user.packs_num %></th>
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                              </tr>
-                                  <tr><h2 style="text-align: center;">New Order Available For Delivery</h2></tr>
-                                    <th></th>
-                                    <th>Description</th>
-                                    <th>Size</th>
-                                    <th>Schedule</th>
-                                    
-                                      <% if Subscription.exists?(user_id: current_user.id) %>
-                                        <% for subscription in @subscriptions %>
-                                            <%
-                                            @mySub = subscription.id 
-                                            @myPlan = subscription.plan_id
-                                            %> 
-                                        <% end %>
-                                      <% end %>
-                                            <%  @mySub %>
-                                            <% @myPlan %>
-
-                            <% for order in @order %>
-
-                              <tr>
-                              <td></td>
-                              <td><h4><%= order.order_description %></h4></td>
-                              <td><h4><%= order.order_size %></h4></td>
-                               <% @oid = order.id %>
-                               <% if !Delivery.exists?(order_id: order.id) && Order.find(order.id) %>
-                                    
-                                     <td><%= link_to "Schedule Delivery", "orders/#{@oid}/deliveries", class: "btn btn-default btn-xs" %></td> 
-                                   
-                                <% else %>
-                                <% i += 1 %>
-                                       <td>
-                                       
-                                        Delivery Scheduled
-                                      </td>
-                                      <% if i == 10 %>
-                                      <% break %>
-                                      <% end %>
-                                      
-                                
-                                <% end %>
-                              
-                           
-
-
-                              <% end %>
-                              </tr>
-                               </table>
-                               
-                        <% else %>
-                            
-                            <div class="cust-mob-body-text">
-                            <hr>
-                             <h3 style="color: #2388f9 !important;">No orders available at this time.</h3>
-                             <hr>
-                            <p class="mobile-para">Online purchases sent to your NextPakk address will show up here when they're ready
-                            to be delivered.</p>
-                            </div>
-                        <% end %>
-                  <% else %>
-                      <br /><br /><br /><div class="mobile-body" style="display: none;">
-                      <%= image_tag "https://s3.amazonaws.com/nextpakkweb/delivery-bkg-install-hdr3.jpg", class: "img-responsive" %>
-                         
-
-
-
-                        <br /><h2 style="text-align: center;"><strong>Simple, convenient delivery on your time!</strong></h2>
-                        
-                        <h4>No more <strong>missed delivery slips</strong> or <strong>stolen packages!</strong>
-                          
-                        </h4>
-
-
-                        
-                        <h4>NextPakk the new sorry we missed you.</h4>
-                        <h4>Schedule delivery to your home <strong>7 days a week</strong> from <strong>6pm to midnight.</strong></h4>
-                        <span style="text-align: center;"><h3><strong>Sign Up Today and Set-up a Free Account!</strong></h3></span>
-                      </div>
-                      <div class="row" style="margin:0px;">
-                    <div class="col-lg-12">
-                      <div class="row">
-                      <div style="background-color: transparent; height:50px">
-                        <a href="/users/sign_in"><span class="col-1g-1 text-center" style="background-color:white; height:50px; width:48%; float:left; line-height: 50px; color: #000033; border-radius: 10px; border: 2px solid #eaeaea !important; font-size: 20px; cursor: inherit; display: inline-block; margin-right: 2px;">
-                            <span class="glyphicon glyphicon-log-in" style="font-size: 20px;"></span> Login
-                          </span></a>
-                        <a href="/users/sign_up"><span class="col-1g-1 text-center" style="background-color:white; height:50px; width:48%; float:left; line-height: 50px; color: #000033; border-radius: 10px; border: 2px solid #eaeaea !important; font-size: 20px; cursor: inherit; display: inline-block; margin-left: 2px;">
-                            <span class="glyphicon glyphicon-pencil" style="font-size: 20px;"></span> Signup
-                          </span></a>
-                        
-                        </div>
-                      </div>
-                    </div>
-                      <div class="container" style="display: none;">
-                    
-                        <div class="row">
-                          <div class="col-xs-6">
-                              <%= link_to "login", new_user_session_path, class: "btn btn-info btn-lg" %>
-                            </div>
-                          <div class="col-xs-6">
-                              <%= link_to "sign up", new_user_registration_path, class: "btn btn-info btn-lg " %>
-                            </div>
-                        </div>
-                      </div>
-                  <% end %>
-                </div>
-                <br />
-                      <% if user_signed_in? && current_user.admin? %>
-                <table class="table table-hover table-condensed" style="display: none;">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Address</th>
-                      <th>Phone</th>
-                      <th>Size</th>
-                        <th colspan="2"></th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <% @deliveries.each do |delivery| %>
-                      <tr>
-                        <td><%= link_to delivery.name, delivery %></td>
-                        <td><%= link_to delivery.address, "http://maps.google.com/?q=#{delivery.address}" %></td>
-                        <td><%= delivery.phone %></td>
-                        <td><%= link_to delivery.size, delivery.size %></td> 
-                          <td><%= link_to 'Edit', edit_delivery_path(delivery), class: "btn btn-link" %></td>
-                          <td><%= link_to 'Destroy', delivery, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></td>
-                        <% end %>
-                      </tr>
-                    <% end %>
-                  </tbody>
-                </table>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <%= render 'layouts/rs_topglobaltabs' %>
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
 
     </section>
-  </div>  
-  
+
+    <!-- Main content -->
+
+                  
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <h2>Thank you! We need your help. Would you share your experience on one of these sites?</h2><br />
+
+        <h1>LOGOS FOR REVIEW SITES HERE</h1>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
+
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+     <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+          </div>
+        </div>
+        <div class="box-body" style="text-align: center; margin: auto;">
+                      <% if current_user.image.present? %>
+                            <%= image_tag current_user.image, class: "img-circle", style: "width: 304px;" %>
+                          <% else %>
+                            <%= image_tag "/assets/fallback/default.png", class: "img-circle", style: "width: 304px;" %>
+                      <% end %>
+
+                  <div class="row" style="margin-bottom: 30px;">
+                    <h2>
+                      Your feedback not only helps us, it helps other potential customers.<br /> Would you recommend us to your friends and family?
+                    </h2>
+                  </div>
+                  <div class="row">
+                  <div class="col-md-6">
+                    <div class="box box-solid">
+                      <div class="box-body" style="float: right;">
+                      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                        <a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-up.jpg", class: "img-responsive", style: "width: 200px; margin-top: -20px;" %></a>
+                         </button>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+
+
+                  <div class="col-md-6">
+                    <div class="box box-solid">
+                      <div class="box-body">
+                        <a href="#" style="cursor: pointer;"><%= image_tag "https://s3.amazonaws.com/reviewssos/thumbs-down.jpg", class: "img-responsive", style: "width: 200px; margin-top: -20px;" %></a>
+                      </div>
+                      <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                  </div>
+                  <!-- ./col -->
+
+                  </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+         <%=
+            #url = 'https://www.yelp.com/biz/egg-house-cafe-crystal'
+
+            page = MetaInspector.new('https://www.yelp.com/biz/egg-house-cafe-crystal') 
+
+            page.parsed
+
+            doc = page.parsed
+
+            review = doc.css("div.biz-page-actions a")[0]['href']
+
+
+            link_to "write a review", "https://yelp.com#{review}", class: "btn-primary btn", style: "color:white;"
+          %>
+          <%=  
+              str = "Spotberry Online Solutions"
+              str.parameterize('-')
+
+          %>
+        </div>
+        <!-- /.box-footer-->
+      </div>
+      <!-- /.box -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%= render 'layouts/rs_footer' %>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-user bg-yellow"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                <p>New phone +1(800)555-1234</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                <p>nora@example.com</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                <p>Execution time 5 seconds</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Allow mail redirect
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Other sets of options are available
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Expose author name in posts
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Allow the user to show his name in blog posts
+            </p>
+          </div>
+          <!-- /.form-group -->
+
+          <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Show me as online
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Turn off notifications
+              <input type="checkbox" class="pull-right">
+            </label>
+          </div>
+          <!-- /.form-group -->
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Delete chat history
+              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+            </label>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<!-- jQuery UI 1.11.4 -->
+
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.7 -->
+<!-- Morris.js charts -->
+
+<!-- AdminLTE App -->
+
+
+</body>
+</html>
+ <% else %>           
+    <%= render 'layouts/rs_home' %>       
+<% end %>
+            
