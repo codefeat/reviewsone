@@ -4,7 +4,10 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery with: :exception
 respond_to :html, :json
 
-  protect_from_forgery
+  #protect_from_forgery with: :exception
+
+  protect_from_forgery 
+
 
   before_action :configure_permitted_parameters, if: :devise_controller?
  
@@ -13,11 +16,11 @@ respond_to :html, :json
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:zip_code])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:zipcode])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:promo_code])
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:last_name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:zip_code])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:zipcode])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:image])
     devise_parameter_sanitizer.permit(:account_update, keys: [:image])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:packs_num])  
@@ -26,4 +29,12 @@ respond_to :html, :json
   def create_subscription
       Subscription.create(:user_id => current_user.id, :plan_id => 1)
   end
+
+  #def respond_modal_with(*args, &blk)
+    #options = args.extract_options!
+    #options[:responder] = ModalResponder
+    #respond_with *args, options, &blk
+  #end
+
+
 end

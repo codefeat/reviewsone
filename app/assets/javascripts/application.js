@@ -20,7 +20,6 @@
 //= require bootstrap.min
 //= require admin-lte
 //= require jquery.easing
-//= require twitter/bootstrap
 //= require_tree .
 
 
