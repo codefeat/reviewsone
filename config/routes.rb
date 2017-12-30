@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :invites
   resources :promos
   resources :purchases, only: [:show]
 
@@ -73,9 +74,9 @@ Rails.application.routes.draw do
 
   get 'orders/:oid/deliveries' => 'deliveries#new'
 
-  #match 'users/:id' => 'users#show', via: :get
+  match 'users/:id' => 'users#show', via: :get
 
-  get 'users/:id' => 'users#show'
+  #get 'users/:id' => 'users#show'
 
   resources :users, only: [:show]
 

@@ -118,6 +118,9 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise_invitable (1.7.2)
+      actionmailer (>= 4.1.0)
+      devise (>= 4.0.0)
     domain_name (0.5.20161129)
       unf (>= 0.0.5, < 1.0.0)
     draper (2.1.0)
@@ -298,6 +301,7 @@ GEM
     formtastic_i18n (0.6.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    groupify (0.9.0)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -504,10 +508,12 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   datetimepicker-rails!
   devise
+  devise_invitable (~> 1.7.0)
   draper
   figaro
   fog
   font-awesome-rails
+  groupify
   jbuilder (~> 2.0)
   jquery-easing-rails
   jquery-rails
