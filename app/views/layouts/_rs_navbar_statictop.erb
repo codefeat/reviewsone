@@ -266,7 +266,7 @@
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
+              <li class="user-body" style="display: none;">
                 <div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">Followers</a>
@@ -283,10 +283,13 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+
+          <%= link_to "Profile", current_user, class: "btn btn-default btn-flat" %>
+            
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <%= link_to "Sign Out", destroy_user_session_path, class: "btn btn-default btn-flat", method: :delete %>
+                                 
                 </div>
               </li>
             </ul>

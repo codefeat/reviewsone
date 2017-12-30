@@ -23,4 +23,15 @@
 //= require_tree .
 
 
-
+  $(function() {
+    var flashCallback;
+    flashCallback = function() {
+        return $("#notice_wrapper’").fadeOut();
+    };
+    $("#notice_wrapper").bind('click', (function(_this) {
+        return function(ev) {
+            return $("#notice_wrapper").fadeOut();
+        };
+    })(this));
+    return setTimeout(flashCallback, 2000);
+});

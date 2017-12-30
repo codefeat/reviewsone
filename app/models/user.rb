@@ -9,7 +9,14 @@ end
   mount_uploader :image, ImageUploader	
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
+  
+  has_many :invitations, :class_name => "Invite", :foreign_key => 'recipient_id'
+  has_many :sent_invites, :class_name => "Invite", :foreign_key => 'sender_id'
+
+  #groupify :group_member
+  #groupify :named_group_member
+
+  devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
          has_many :reviews, dependent:  :destroy
          has_many :roles
