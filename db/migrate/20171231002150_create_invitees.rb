@@ -4,7 +4,7 @@ class CreateInvitees < ActiveRecord::Migration
       t.string     :ifname
       t.string     :ilname
       t.string     :iemail
-	  t.string     :invitation_token
+	  t.string     :invite_token
       t.datetime   :invite_created_at
       t.datetime   :invite_sent_at
       t.references :invited_by, polymorphic: true
