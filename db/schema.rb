@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171229205506) do
+ActiveRecord::Schema.define(version: 20171231002150) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -92,6 +92,22 @@ ActiveRecord::Schema.define(version: 20171229205506) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "invitees", force: :cascade do |t|
+    t.string   "ifname"
+    t.string   "ilname"
+    t.string   "iemail"
+    t.string   "invitation_token"
+    t.datetime "invite_created_at"
+    t.datetime "invite_sent_at"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invite_count",      default: 0
+  end
+
+  add_index "invitees", ["invite_count"], name: "index_invitees_on_invite_count"
+  add_index "invitees", ["invited_by_id"], name: "index_invitees_on_invited_by_id"
+  add_index "invitees", [nil], name: "index_invitees_on_invite_token", unique: true
 
   create_table "invites", force: :cascade do |t|
     t.string   "fname"

@@ -2,7 +2,7 @@ class MyMailer < Devise::Mailer
   helper :application # gives access to all helpers defined within `application_helper`.
   include Devise::Controllers::UrlHelpers # Optional. eg. `confirmation_url`
   default template_path: 'devise/mailer' # to make sure that your mailer uses the devise views
-  default from: "delivery@nextpakk.com"
+  default from: "lowellfortune@gmail.com"
 
 	def confirmation_instructions(record, token, opts={})
 	  headers["Custom-header"] = "NextPakk Delivery"
@@ -20,13 +20,17 @@ class MyMailer < Devise::Mailer
 	end
 
 	def new_purchase(purchase)
-  	#@user = current_user
-    @purchase = purchase
-    @plan = @purchase.plan
+	  	#@user = current_user
+	    @purchase = purchase
+	    @plan = @purchase.plan
+	    mail(:to => "#{purchase.email}", from: "delivery@nextpakk.com", subject: "Thank you for using NextPakk.")
+  	end
 
-
-    mail(:to => "#{purchase.email}", from: "delivery@nextpakk.com", subject: "Thank you for using NextPakk.")
-  end
+  	def new_invite(invite)
+  		#render layout: 'invite_mailer'
+  		@invite = invite
+  		mail(:to => "#{@invite.email}>", from: "lowellfortune@gmail.com", subject: "Follow Up!")
+  	end
 
 
 
