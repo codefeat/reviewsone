@@ -139,19 +139,6 @@
 	padding-top: 40px;
 }
 
-    /* Large desktop */
-    @media (min-width: 1200px) { ... }
-     
-    /* Portrait tablet to landscape and desktop */
-    @media (min-width: 768px) and (max-width: 979px) { ... }
-     
-    /* Landscape phone to portrait tablet */
-    @media (max-width: 767px) { ... }
-     
-    /* Landscape phones and down */
-    @media (max-width: 480px) { ... }
-
-
 .intro-section {
   width:100%;
   height:500px;
@@ -170,7 +157,7 @@
 	background-color: #2388f9 !important;
 }
 
-.navbar-nav > .user-menu > .dropdown-menu > li.user-header{
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
 	background: #2388f9 !important;
 }
 
