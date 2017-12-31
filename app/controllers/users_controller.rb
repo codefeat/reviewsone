@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def show
   	@user = current_user
   	@subscriptions = Subscription.all
-  	@subscription = current_user.subscriptions
+  	#@subscription = current_user.subscriptions
   	@plans = Plan.all
     @promos = Promo.all
   end
@@ -26,6 +26,11 @@ class UsersController < ApplicationController
         end
       end
 
+  end
+
+  def invite_user
+    @user = User.invite!(:email => params[:user][:email], :name => params[:user][:first_name])
+    render :json => @user
   end
   
 end

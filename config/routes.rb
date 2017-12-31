@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :invitees
   resources :invites
   resources :promos
   resources :purchases, only: [:show]
@@ -66,11 +67,13 @@ Rails.application.routes.draw do
 
     #match 'subscriptions/:id/pay' => 'subscriptions#pay', via: [:get, :post], :as => :subpay
  
-  get 'pages/about'
+  get 'companies/about'
 
-  get 'pages/contact'
+  get 'companies/contact'
 
-  get 'pages/index'
+  get 'companies/index'
+
+  get 'companies/spotberry'
 
   get 'orders/:oid/deliveries' => 'deliveries#new'
 

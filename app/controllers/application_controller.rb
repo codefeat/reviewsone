@@ -25,6 +25,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:image])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:packs_num]) 
     devise_parameter_sanitizer.permit(:accept_invitation, keys: [:email]) 
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name]) 
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:last_name]) 
   end
 
   def create_subscription

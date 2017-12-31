@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Invitees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fname</th>
+      <th>Lname</th>
+      <th>Email</th>
+      <th>Sent by</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invitees.each do |invitee| %>
+      <tr>
+        <td><%= invitee.fname %></td>
+        <td><%= invitee.lname %></td>
+        <td><%= invitee.email %></td>
+        <td><%= invitee.sent_by_id %></td>
+        <td><%= link_to 'Show', invitee %></td>
+        <td><%= link_to 'Edit', edit_invitee_path(invitee) %></td>
+        <td><%= link_to 'Destroy', invitee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Invitee', new_invitee_path %>
