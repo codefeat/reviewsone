@@ -1,39 +1,145 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Invites</h1>
+<% if user_signed_in? %>
+<%= render 'layouts/rs_header' %>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <header class="main-header">
+    <!-- Logo -->
+    <%= render 'layouts/rs_logo' %>
+    <!-- Header Navbar: style can be found in header.less -->
+ <%= render 'layouts/rs_navbar_statictop' %>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+<%= render 'layouts/rs_aside_mainSideBar' %>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <%= render 'layouts/rs_topglobaltabs' %>
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius: 6px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <h2>Thank you! We need your help. Would you share your experience on one of these sites?</h2><br />
 
-<table>
-  <thead>
+        <h1>LOGOS FOR REVIEW SITES HERE</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalFormLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius: 6px;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalFormLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <h2>We strive for 100% customer satisfaction. If we fell short, please tell us more so we can address your concerns.</h2>
+
+        <h1>FORM GOES HERE</h1>
+
+        <%= simple_form_for Invite.new do |f| %>
+          <%= f.error_notification %>
+
+          <div class="form-inputs">
+            <%= f.input :fname %>
+            <%= f.input :lname %>
+            <%= f.input :email %>
+          </div>
+
+          <%= f.hidden_field :sender_id, value: current_user.id %>
+          <%= f.hidden_field :token, value: @form_auth_token %>
+
+          <div class="modal-footer">
+            <%= f.button :submit, class: "btn btn-primary" %>
+          </div>
+        <% end %>
+
+      </div>
+      <div class="modal-footer" style="display: none;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content">
+<div class="row">
+<div class="col-md-6">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Pending Invites</h3>
+
+
+<table class="table table-striped">
     <tr>
       <th>Fname</th>
       <th>Lname</th>
       <th>Email</th>
-      <th>User group</th>
       <th>Sender</th>
-      <th>Recipient</th>
-      <th>Token</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
 
-  <tbody>
     <% @invites.each do |invite| %>
       <tr>
         <td><%= invite.fname %></td>
         <td><%= invite.lname %></td>
         <td><%= invite.email %></td>
-        <td><%= invite.user_group_id %></td>
         <td><%= invite.sender_id %></td>
-        <td><%= invite.recipient_id %></td>
-        <td><%= invite.token %></td>
         <td><%= link_to 'Show', invite %></td>
         <td><%= link_to 'Edit', edit_invite_path(invite) %></td>
         <td><%= link_to 'Destroy', invite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-  </tbody>
 </table>
-
 <br>
+</div>
+</div>
+</div>
+<div class="col-md-6">
 
-<%= link_to 'New Invite', new_invite_path %>
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalForm">
+Add New Invite
+</button>
+
+</div>
+</div>
+</div>
+
+</div>
+  <!-- /.content-wrapper -->
+  <%= render 'layouts/rs_footer' %>
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- AdminLTE App -->
+</body>
+</html>
+     
+<% end %>
+

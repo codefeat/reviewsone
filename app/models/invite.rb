@@ -1,6 +1,8 @@
 class Invite < ActiveRecord::Base
 	after_create :send_invite
 
+	belongs_to :user
+
 	#belongs_to :user_group
 
 	#belongs_to :sender, :class_name => 'User'

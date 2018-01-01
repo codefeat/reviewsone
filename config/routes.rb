@@ -75,6 +75,8 @@ Rails.application.routes.draw do
 
   get 'companies/spotberry'
 
+  get 'invites/index'
+
   get 'orders/:oid/deliveries' => 'deliveries#new'
 
   match 'users/:id' => 'users#show', via: :get
