@@ -39,5 +39,9 @@ class ApplicationController < ActionController::Base
     #respond_with *args, options, &blk
   #end
 
+  def get_invite_index
+    redirect_to 'index'
+  end
+
 
 end
