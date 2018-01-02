@@ -179,3 +179,7 @@
 .skin-blue .navbar .nav .open > a:focus {
 	background-color: #2388f9 !important;
 }
+
+.nav-tabs > li {
+	background: #e6e4e4;
+}
