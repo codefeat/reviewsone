@@ -2,6 +2,12 @@ class InvitesController < InheritedResources::Base
   before_action :authenticate_user!
 
   #after_action :get_invite_index
+
+    def index
+    	@user = current_user
+    	@invites = Invite.all
+    end
+
 	def new
     	@invite = Invite.new
     end

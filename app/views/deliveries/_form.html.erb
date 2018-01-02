@@ -14,7 +14,7 @@
     </div>
   <% end %>
 <% userId = current_user.id %>
-<% userPacknum = current_user.packs_num %>
+<% userPacknum = current_user.rsos_num %>
  
   <div class="form-group">
     <%= f.label :address %><br>
@@ -27,7 +27,7 @@
   <div class="form-group" style="display: block;">
     
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.hidden_field :user_packnum, value: current_user.packs_num %>
+    <%= f.hidden_field :user_packnum, value: current_user.rsos_num %>
     <% if @delivery.new_record? %>
     <% if !Delivery.exists?(order_id: @myOrder) && Order.exists?(user_id: current_user.id) %>
         <% for order in @order %>

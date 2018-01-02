@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171231002150) do
+ActiveRecord::Schema.define(version: 20180102150032) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -254,12 +254,12 @@ ActiveRecord::Schema.define(version: 20171231002150) do
     t.boolean  "shopper",                default: true
     t.boolean  "driver",                 default: false
     t.integer  "role_id",                default: 2
-    t.string   "packs_num"
+    t.string   "rsos_num"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "zipcode"
+    t.string   "business_zipcode"
     t.string   "promo_code"
     t.string   "invitation_token"
     t.datetime "invitation_created_at"
@@ -269,6 +269,9 @@ ActiveRecord::Schema.define(version: 20171231002150) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      default: 0
+    t.string   "business_name"
+    t.string   "business_phone"
+    t.string   "business_email"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

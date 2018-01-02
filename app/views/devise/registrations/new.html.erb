@@ -49,9 +49,9 @@
                       Array.new(number) { charset.sample }.join
                     end
 
-                    nextpakk = "NP"
+                    rviewsos = "rsos"
 
-                    custNum = nextpakk + generate_code(4)
+                    custNum = reviewsos + generate_code(4)
                     %>
 
                     <script language="javascript">
@@ -79,8 +79,8 @@
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <%= f.label :zipcode %>
-                        <%= f.text_field :zipcode, class: "form-control" %>
+        <%= f.label :business_zipcode %>
+                        <%= f.text_field :business_zipcode, class: "form-control" %>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -112,7 +112,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-           <%= f.hidden_field :packs_num, :value => custNum %>
+           <%= f.hidden_field :rsos_num, :value => custNum %>
                         <%= f.submit "Sign up", class: "btn btn-info" %>
                       </div>
                     <% end %>
