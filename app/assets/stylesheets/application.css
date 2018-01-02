@@ -183,3 +183,7 @@
 .nav-tabs > li {
 	background: #e6e4e4;
 }
+
+.main-header {
+  background: transparent !important;
+}

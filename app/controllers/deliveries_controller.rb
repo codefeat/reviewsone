@@ -96,7 +96,7 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       @delivery.user_id = current_user.id
-      @delivery.user_packnum = current_user.packs_num
+      @delivery.user_packnum = current_user.rsos_num
       #@slotid = @slot.id
       if @delivery.save
          #note add this to url for sched orders/#{@oid}/deliveries"

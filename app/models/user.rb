@@ -28,14 +28,14 @@ end
          has_many :plans
          has_many :promos
 
-         validates :first_name, :last_name, :zipcode, presence: true
+         validates :first_name, :last_name, :business_zipcode, presence: true
 
          # User Avatar Validation
          validates_integrity_of  :image
          validates_processing_of :image
 
          #validates_format_of :zip, :with => /^\d{5}(-\d{4})?$/, :message => "should be in the form 12345 or 12345-1234"
-         validates :zipcode, format: { with: /\A\d{5}(-\d{4})?\z/, message: "should be in the form 12345 or 12345-1234" }
+         validates :business_zipcode, format: { with: /\A\d{5}(-\d{4})?\z/, message: "should be in the form 12345 or 12345-1234" }
   /\A\(\d{3}\) \d{3}-\d{4}\z/
    def display_name
     	return self.email
@@ -46,7 +46,7 @@ end
       errors[:image] << "should be less than 500KB" if image.size > 0.5.megabytes
     end
 
-         validates :first_name, :last_name, :zipcode, presence: true
+         validates :first_name, :last_name, :business_zipcode, presence: true
   private
     def set_confirmation_token
       if self.confirm_token.blank?
