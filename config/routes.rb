@@ -66,7 +66,12 @@ Rails.application.routes.draw do
     #get 'subscriptions/:id/scheduled' => ''
 
     #match 'subscriptions/:id/pay' => 'subscriptions#pay', via: [:get, :post], :as => :subpay
- 
+  devise_scope :user do 
+     match 'users/acct_setting' => 'registrations#acct_setting', :via => [:get], :as => 'acct_setting'
+  end 
+
+  get 'widgets/index'
+
   get 'companies/about'
 
   get 'companies/contact'

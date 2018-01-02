@@ -40,7 +40,8 @@ class ApplicationController < ActionController::Base
   #end
 
   def get_invite_index
-    redirect_to 'index'
+    format.html { redirect_to invites_url, notice: 'Invite status was successfully created.' }
+        format.json { render :show, status: :created, location: @invite }
   end
 
 

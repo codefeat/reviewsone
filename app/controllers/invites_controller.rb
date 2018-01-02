@@ -2,6 +2,21 @@ class InvitesController < InheritedResources::Base
   before_action :authenticate_user!
 
   #after_action :get_invite_index
+	def new
+    	@invite = Invite.new
+    end
+
+	def create
+	  @invite = Invite.new(invite_params)
+
+	  respond_to do |format|
+	    if @invite.save
+	      format.html { redirect_to invites_path, notice: 'invite was successfully created.' }
+	    else
+	      format.html { render action: "new" }
+	    end
+	  end
+	end
 
   private
 
@@ -9,19 +24,6 @@ class InvitesController < InheritedResources::Base
       params.require(:invite).permit(:fname, :lname, :email, :user_group_id, :sender_id, :recipient_id, :token)
     end
 
-    
-
-	#def create
-	  #@invite = Invite.new(invite_params)
-
-	  #respond_to do |format|
-	    #if @invite.save
-	      #format.html { redirect_to invites_path, notice: 'invite was successfully created.' }
-	    #else
-	      #format.html { render action: "new" }
-	    #end
-	  #end
-	#end
 
 	#def new
 		#@invite = Invite.new

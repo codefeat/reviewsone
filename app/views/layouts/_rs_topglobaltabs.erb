@@ -1,8 +1,12 @@
+<div class="navbar-custom-menu" style="float: right; padding: 10px;"><h1><b>Reviews</b>SOS</h1>
+</div>
+
 <ul class="nav nav-tabs">
      <li><%= link_to "DASHBOARD", root_path, class: "nav-item" %></li>
       <li class="nav-item" style="background: #ffffff !important;">
         <a class="nav-link active" href="#">FUNNEL</a>
       </li>
+      <li><%= link_to "WIDGETS", widgets_index_path, class: "nav-item" %></li>
       <li><%= link_to "INVITES", invites_path, class: "nav-item" %></li>
       <li class="nav-item" style="background: #ffffff !important;">
         <a class="nav-link" href="#">REVIEWS</a>
@@ -11,3 +15,13 @@
         <a class="nav-link" href="#">REPORTING</a>
       </li>
     </ul>
+
+    <section class="content-header">
+      <h1>
+        <%= controller_name.upcase %>
+      </h1>
+      <ol class="breadcrumb" style="display: none;">
+        <li><a href="#"><i class="fa fa-dashboard"></i> ReviewsSOS</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
