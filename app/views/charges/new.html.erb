@@ -1,52 +1,37 @@
-<%= form_tag charges_path, id: 'chargeForm' do %>
-  
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
+<div class="row">
+    <div class="tile-icon-container" style="background: #0069ff !important;">
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+                  <div class="box">             
+                    <div class="icon">
+                      <div class="image"><i class="glyphicon glyphicon-shopping-cart glyph-lrg-cntr"></i></div>
+                      <div class="info-form">
+                      <br /> <br />
+
+      
+                          </div>
+                        </div>
+                        <div class="space"></div>
+                      </div> 
+                    </div>
+  </div>
+  </div>
+  <div id="wrapper">
+       <div id="page-wrapper">
+          <div class="container-fluid" style="width: 80%; margin: 0 auto !important;">
+                      <%= render 'pay' %>
+                      <!-- /.container-fluid -->
+                  </div>     
+        </div><!-- /#page-wrapper -->
+  </div><!-- /#wrapper -->
+<div id="footer" style="background: #0069ff !important;">
+      <div class="container how-nav-container">
+        <div class="col-1g-1 tile-icon how-nav" style="font-size: 20px !important; text-align: left !important;">
+             by <a href="http://www.spotberry.com">Appertry</a>
+        </div>
+        <div class="col-1g-9 tile-icon-sm how-nav-text-container" style="display: none !important;">
+          <a href="/" class="cust-block-icons how-nav-text"> close <i class="glyphicon glyphicon-remove"></i></a>
+        </div>  
       </div>
-
-      <% if Schedule.exists?(user_id: current_user.id) %>
-        <% for schedule in @schedules %>
-          <%= 
-          @myschedule = schedule.id 
-          %> 
-         
-        <% end %>
-      <% end %>
-      <%= f.hidden_field :schedule_id, value: @mySchedule %>
-    <% end %>
-    <!--label class="amount">
-      <span>Amount: $5.00</span>
-    </label>
-  </article-->
-
-  <script src="https://checkout.stripe.com/checkout.js"></script>
-  <%= hidden_field_tag 'stripeToken' %>
-  <%= hidden_field_tag 'amount', @amount %>
-  <%= hidden_field_tag 'stripeEmail' %>
-  <button id="btn-buy" type="button" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Pay</button>
-  
-  <script type="text/javascript">
-    var handler = StripeCheckout.configure({
-      key: '<%= Rails.configuration.stripe[:publishable_key] %>',
-      token: function(token, arg) {
-        document.getElementById("stripeToken").value = token.id;
-        document.getElementById("stripeEmail").value = token.email;
-        document.getElementById("chargeForm").submit();
-      }
-  });
-    document.getElementById('btn-buy').addEventListener('click', function(e)  {
-      handler.open({
-        name: 'Learn Rails',
-        description : 'Product description',
-        amount: document.getElementById('amount').value
-      });
-      e.preventDefault();
-    })
-  </script>
-<% end %>
-
-<footer id="site-footer">
-Made by <a href="http://www.spotberry.com">Spotberry Appertry</a>
-</footer>
+</div>
+</div>
 

@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Link cat:</strong>
+  <%= @link.link_cat %>
+</p>
+
+<p>
+  <strong>Link image:</strong>
+  <%= @link.image %>
+</p>
+<%= link_to 'Edit', edit_link_path(@link) %> |
+<%= link_to 'Back', links_path %>

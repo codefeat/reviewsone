@@ -5172,11 +5172,11 @@ table.text-center th {
 .alert-success,
 .label-success,
 .modal-success .modal-body {
-  background-color: #00a65a !important;
+  background-color: lightgreen !important;
   margin-left: 0px !important;
   text-align: center !important;
   z-index: 1036 !important;
-  height: 59px;
+  height: 90px;
   position: absolute;
   width: 100%;
   opacity: 0.85;

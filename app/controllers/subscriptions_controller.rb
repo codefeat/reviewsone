@@ -52,7 +52,9 @@ class SubscriptionsController < ApplicationController
 
     respond_to do |format|
       if @subscription.save
-        format.html { redirect_to paqs_how1_path, notice: 'Subscription was successfully created.' }
+        #format.html { redirect_to paqs_how1_path, notice: 'Subscription was successfully created.' }
+         format.html { redirect_to url_for(:controller => 'subscriptions', :action => 'pay') }
+        
         format.json { render :show, status: :created, location: @subscription }
       else
         format.html { render :new }

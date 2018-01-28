@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102150032) do
+ActiveRecord::Schema.define(version: 20180124214431) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -60,6 +60,22 @@ ActiveRecord::Schema.define(version: 20180102150032) do
     t.datetime "updated_at",  null: false
     t.integer  "delivery_id"
   end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "deliveries", force: :cascade do |t|
     t.string   "address"
@@ -114,11 +130,69 @@ ActiveRecord::Schema.define(version: 20180102150032) do
     t.string   "lname"
     t.string   "email"
     t.integer  "user_group_id"
-    t.integer  "sender_id"
+    t.integer  "user_id"
     t.integer  "recipient_id"
     t.string   "token"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string   "link_cat"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "maily_herald_dispatches", force: :cascade do |t|
+    t.string   "type",                                       null: false
+    t.integer  "sequence_id"
+    t.integer  "list_id",                                    null: false
+    t.text     "conditions"
+    t.text     "start_at"
+    t.string   "mailer_name"
+    t.string   "name",                                       null: false
+    t.string   "title"
+    t.string   "subject"
+    t.string   "from"
+    t.string   "state",                 default: "disabled"
+    t.text     "template"
+    t.integer  "absolute_delay"
+    t.integer  "period"
+    t.boolean  "override_subscription"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "maily_herald_dispatches", ["name"], name: "index_maily_herald_dispatches_on_name", unique: true
+
+  create_table "maily_herald_lists", force: :cascade do |t|
+    t.string "name",         null: false
+    t.string "title"
+    t.string "context_name"
+  end
+
+  create_table "maily_herald_logs", force: :cascade do |t|
+    t.integer  "entity_id",     null: false
+    t.string   "entity_type",   null: false
+    t.string   "entity_email"
+    t.integer  "mailing_id"
+    t.string   "status",        null: false
+    t.text     "data"
+    t.datetime "processing_at"
+  end
+
+  create_table "maily_herald_subscriptions", force: :cascade do |t|
+    t.integer  "entity_id",                    null: false
+    t.integer  "list_id",                      null: false
+    t.string   "entity_type",                  null: false
+    t.string   "token",                        null: false
+    t.text     "settings"
+    t.text     "data"
+    t.boolean  "active",       default: false, null: false
+    t.datetime "delivered_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "order_statuses", force: :cascade do |t|
@@ -160,6 +234,22 @@ ActiveRecord::Schema.define(version: 20180102150032) do
     t.string   "sku"
   end
 
+  create_table "poor_reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "invite_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "message"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "email"
+    t.string   "phone"
+    t.string   "ip_address"
+    t.string   "feedback_action"
+    t.integer  "status",          default: 0
+    t.string   "note"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string   "prod_name"
     t.string   "description"
@@ -169,6 +259,31 @@ ActiveRecord::Schema.define(version: 20180102150032) do
     t.datetime "updated_at",  null: false
     t.string   "sku"
     t.decimal  "total_price"
+  end
+
+  create_table "profile_links", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "profile_review_id"
+    t.integer  "link_id"
+    t.string   "link_url"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "profile_reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "address1"
+    t.string   "addresss2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "time_zone"
+    t.string   "lat"
+    t.string   "long"
+    t.string   "gplace_id"
+    t.string   "gcid"
+    t.string   "gfid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "promos", force: :cascade do |t|
@@ -192,6 +307,15 @@ ActiveRecord::Schema.define(version: 20180102150032) do
     t.integer  "order_qty"
     t.integer  "order_num"
     t.integer  "subscription_id"
+  end
+
+  create_table "review_statuses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "feedback_id"
+    t.string   "note"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "status",      default: 0
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -272,6 +396,7 @@ ActiveRecord::Schema.define(version: 20180102150032) do
     t.string   "business_name"
     t.string   "business_phone"
     t.string   "business_email"
+    t.string   "website_url"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

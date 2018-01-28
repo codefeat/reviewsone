@@ -9,7 +9,12 @@
       <div class="modal-body">
         <h2>Thank you! We need your help. Would you share your experience on one of these sites?</h2><br />
 
-        <h1>LOGOS FOR REVIEW SITES HERE</h1>
+         <% @newLinks.each do |profile_link| %>
+                                          <button type="button" class="btn btn-default" style="width: 125px;">
+                                       <a href="<%= profile_link.link_url %>" style="cursor: pointer;"  ><%= image_tag "#{profile_link.link.image}", class: "img-responsive" %></a>
+                                        <% profile_link.id %>
+                                        </button>
+                                      <% end %>
 
       </div>
       <div class="modal-footer">

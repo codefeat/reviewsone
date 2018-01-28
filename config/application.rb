@@ -26,5 +26,10 @@ module Reviewsone
     config.active_record.raise_in_transactional_callbacks = true
     config.assets.initialize_on_precompile = false
 
+    config.active_job.queue_adapter = :delayed_job
+
+    config.action_mailer.default_options = { from: "hello@mailyherald.org" }
+config.action_mailer.default_url_options = { host: "mailyherald.org" }
+
   end
 end

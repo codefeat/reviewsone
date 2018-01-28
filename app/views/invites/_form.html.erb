@@ -5,11 +5,11 @@
     <%= f.input :fname %>
     <%= f.input :lname %>
     <%= f.input :email %>
-    <%= f.input :sender_id %>
+    <%= f.input :user_id %>
     <%= f.input :token %>
   </div>
 
-  <%= f.hidden_field :sender_id, value: current_user.id %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :token, value: @form_auth_token %>
 
   <div class="form-actions">

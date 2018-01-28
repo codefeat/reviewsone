@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @poor_review.user_id %>
+</p>
+
+<p>
+  <strong>Invite:</strong>
+  <%= @poor_review.invite_id %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @poor_review.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @poor_review.last_name %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @poor_review.message %>
+</p>
+
+<%= link_to 'Edit', edit_poor_review_path(@poor_review) %> |
+<%= link_to 'Back', poor_reviews_path %>

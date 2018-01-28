@@ -15,11 +15,13 @@
 
        <% flash.each do |name, msg| %>
        <%if msg.is_a?(String) %>
-       		<div id="notice_wrapper" style="font-size: 16px; font-weight: bold;">
+       		<div class="message">
+          <div id="notice_wrapper" >
             <div class="alert alert-<%= name == "notice" ? "success" : "danger" %> alert-dismissable" style="margin-bottom: 0px !important;">
          		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-         		<%= content_tag :div, msg, :id => "flash_#{name}" %>
+             <%= content_tag(:div, msg, :id => "flash_#{name}", class: "alert alert-#{name} fade in") %>
          		</div>
+            </div>
           </div>
        		<% end %>
        		<% end %>
@@ -27,115 +29,3 @@
 	</div>
 </body>
 </html>
-<script type="text/javascript">
-  $(function() {
-   var accordionActive = false;
-  
-   $(window).on('resize', function() {
-       var windowWidth = $(window).width();
-       var $topMenu = $('#top-menu');
-       var $sideMenu = $('#side-menu');     
-       
-       if (windowWidth < 768) {
-          if ($topMenu.hasClass("active")) {             
-            $topMenu.removeClass("active");
-            $sideMenu.addClass("active");
-            
-            var $ddl = $('#top-menu .movable.dropdown');
-            $ddl.detach();
-            $ddl.removeClass('dropdown');
-            $ddl.addClass('nav-header');
-            
-            $ddl.find('.dropdown-toggle').removeClass('dropdown-toggle').addClass('link');
-            $ddl.find('.dropdown-menu').removeClass('dropdown-menu').addClass('submenu');
-                        
-            $ddl.prependTo($sideMenu.find('.accordion'));
-            $('#top-menu #qform').detach().removeClass('navbar-form').prependTo($sideMenu);
-            
-            if (!accordionActive) {
-               var Accordion2 = function(el, multiple) {
-                 this.el = el || {};
-                 this.multiple = multiple || false;
-
-                  // Variables privadas
-                 var links = this.el.find('.movable .link');
-                 // Evento
-                 links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown);
-                }
-
-              Accordion2.prototype.dropdown = function(e) {
-                var $el = e.data.el;
-                $this = $(this),
-                  $next = $this.next();
-
-                $next.slideToggle();
-                $this.parent().toggleClass('open');
-
-                if (!e.data.multiple) {
-                  $el.find('.movable .submenu').not($next).slideUp().parent().removeClass('open');
-                };
-              }    
-
-              var accordion = new Accordion2($('ul.accordion'), false); 
-              accordionActive = true;
-            }
-          }
-       }
-       else {
-          if ($sideMenu.hasClass("active")) {              
-            $sideMenu.removeClass('active');
-            $topMenu.addClass('active');
-            
-            var $ddl = $('#side-menu .movable.nav-header');
-            $ddl.detach();
-            $ddl.removeClass('nav-header');
-            $ddl.addClass('dropdown');
-            
-            $ddl.find('.link').removeClass('link').addClass('dropdown-toggle');
-            $ddl.find('.submenu').removeClass('submenu').addClass('dropdown-menu');
-            
-             $('#side-menu #qform').detach().addClass('navbar-form').appendTo($topMenu.find('.nav'));
-            $ddl.appendTo($topMenu.find('.nav'));
-          }
-       }
-   });
-  
-  /**/
-  var $menulink = $('.side-menu-link'),       
-      $wrap = $('.wrap');
-  
-  $menulink.click(function() {    
-    $menulink.toggleClass('active');
-    $wrap.toggleClass('active');    
-    return false;
-  });
-  
-  /*Accordion*/
-  var Accordion = function(el, multiple) {
-    this.el = el || {};
-    this.multiple = multiple || false;
-
-    // Variables privadas
-    var links = this.el.find('.link');
-    // Evento
-    links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown);
-  }
-
-  Accordion.prototype.dropdown = function(e) {
-     var $el = e.data.el;
-     $this = $(this),
-      $next = $this.next();
-
-    $next.slideToggle();
-    $this.parent().toggleClass('open');
-
-    if (!e.data.multiple) {
-      $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
-    };
-  } 
-
-  var accordion = new Accordion($('ul.accordion'), false); 
-  
-  
-});
-</script>

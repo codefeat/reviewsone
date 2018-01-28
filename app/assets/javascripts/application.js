@@ -12,26 +12,24 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require best_in_place
+//= require best_in_place.jquery-ui
 //= require moment
 //= require bootstrap-datepicker/core
 //= require bootstrap-datetimepicker
 //= require pickers
 //= require turbolinks
 //= require bootstrap.min
-//= require admin-lte
+//= require adminlte
 //= require jquery.easing
 //= require_tree .
 
 
-  $(function() {
-    var flashCallback;
-    flashCallback = function() {
-        return $("#notice_wrapper’").fadeOut();
-    };
-    $("#notice_wrapper").bind('click', (function(_this) {
-        return function(ev) {
-            return $("#notice_wrapper").fadeOut();
-        };
-    })(this));
-    return setTimeout(flashCallback, 2000);
+$(document).ready(function () {
+  $(".message").delay(1000).fadeOut(3000);  
+}
+
+
+$(document).on("click", ".bg-info", function(e){
+   $(this).hide();
 });
