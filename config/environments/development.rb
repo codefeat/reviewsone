@@ -41,6 +41,8 @@ Rails.application.configure do
 
   #config.serve_static_files = true
 
+  config.active_job.queue_adapter = :delayed_job
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   # required for devise gem

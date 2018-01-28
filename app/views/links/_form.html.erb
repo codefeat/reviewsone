@@ -1,0 +1,17 @@
+  <%= form_for @link, html: { multipart: true }  do |f| %>
+  <%= f.file_field :image %>
+
+  <%= devise_error_messages! %>
+<div class="form-group">
+    <%= f.label :image do %><br>
+    <%= f.file_field :image, class: "form-control", style: "display:none;" %>
+    </div>
+    <% end %>
+
+  <div class="form-inputs">
+    <%= f.text_field :link_cat %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

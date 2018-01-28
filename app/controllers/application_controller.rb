@@ -14,10 +14,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:business_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:business_phone])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:business_zipcode])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:business_zipcode])
     devise_parameter_sanitizer.permit(:sign_up, keys: [:promo_code])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:business_name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:last_name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:zipcode])
@@ -31,6 +34,14 @@ class ApplicationController < ActionController::Base
 
   def create_subscription
       Subscription.create(:user_id => current_user.id, :plan_id => 1)
+  end
+
+  def create_profile_review
+      ProfileReview.create(:user_id => current_user.id)
+  end
+
+  def after_update_path
+    redirect_to root_path
   end
 
   #def respond_modal_with(*args, &blk)

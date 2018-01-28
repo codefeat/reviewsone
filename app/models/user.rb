@@ -14,8 +14,12 @@ end
   has_many :sent_invites, :class_name => "Invite", :foreign_key => 'sender_id'
 
   has_many :invites
+  has_many :poor_reviews
   #groupify :group_member
   #groupify :named_group_member
+  has_many :profile_reviews
+
+  has_many :profile_links
 
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -28,7 +32,8 @@ end
          has_many :plans
          has_many :promos
 
-         validates :first_name, :last_name, :business_zipcode, presence: true
+
+         validates :business_name, :business_phone, :business_zipcode, :first_name, :last_name, :website_url, presence: true
 
          # User Avatar Validation
          validates_integrity_of  :image
@@ -46,7 +51,7 @@ end
       errors[:image] << "should be less than 500KB" if image.size > 0.5.megabytes
     end
 
-         validates :first_name, :last_name, :business_zipcode, presence: true
+         validates :business_name, :business_phone, :business_zipcode, :first_name, :last_name, :website_url, presence: true
   private
     def set_confirmation_token
       if self.confirm_token.blank?

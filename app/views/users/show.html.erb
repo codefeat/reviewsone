@@ -76,22 +76,20 @@
           </div>
         </div>
         <div class="box-body">
-          <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+          <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong><br />
 
-              <p class="text-muted">3909 Minnehaha Ave <br />
-                                    NextPakk #<%= @user.rsos_num %><br />
-                                    Minneapolis, MN 55406</p>
+                      <span class="text-muted" style="font-weight: bold;"><%= @user.business_name %></span><br />
+                      <span class="text-muted"><%= @pReview.address1 %></span><br />
+                      <span class="text-muted"><%= @pReview.city %> <%= @pReview.state %>, <%= @user.business_zipcode %> </span><br /><br />
+
               <hr>
 
               
 
-              <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+ 
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          Footer
         </div>
         <!-- /.box-footer-->
       </div>

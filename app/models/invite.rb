@@ -11,5 +11,6 @@ class Invite < ActiveRecord::Base
 
 	def send_invite
 		MyMailer.new_invite(self).deliver_now
+		#MyMailer.new_invite(self).deliver_later!(wait_until: 5.minutes.from_now)
 	end
 end

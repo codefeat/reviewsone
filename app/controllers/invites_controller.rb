@@ -5,7 +5,12 @@ class InvitesController < InheritedResources::Base
 
     def index
     	@user = current_user
-    	@invites = Invite.all
+    	@users = User.all
+    	@thisUser = User.find(@user)
+    	@invites = Invite.where(:user_id => @user).paginate(:page => params[:page], :per_page => 10).order('created_at DESC')
+    	@thisBiz = User.joins(:invite).where(:user_id => current_user.id)
+    	@feedbacks = PoorReview.where(:user_id => current_user.id).paginate(:page => params[:page], :per_page => 5).order('created_at DESC')
+		@count = @feedbacks.count
     end
 
 	def new
@@ -13,10 +18,12 @@ class InvitesController < InheritedResources::Base
     end
 
 	def create
+	  @user = current_user
 	  @invite = Invite.new(invite_params)
-
+	  @thisUser = Invite.where(:user_id => @user)
 	  respond_to do |format|
 	    if @invite.save
+	    	@invite.delay.send_invite
 	      format.html { redirect_to invites_path, notice: 'invite was successfully created.' }
 	    else
 	      format.html { render action: "new" }
@@ -27,7 +34,7 @@ class InvitesController < InheritedResources::Base
   private
 
     def invite_params
-      params.require(:invite).permit(:fname, :lname, :email, :user_group_id, :sender_id, :recipient_id, :token)
+      params.require(:invite).permit(:fname, :lname, :email, :user_group_id, :user_id, :recipient_id, :token)
     end
 
 

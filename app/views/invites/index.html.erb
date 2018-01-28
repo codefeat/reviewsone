@@ -1,7 +1,6 @@
 
 <% if user_signed_in? %>
 <%= render 'layouts/rs_header' %>
-<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
   <header class="main-header">
     <!-- Logo -->
@@ -13,9 +12,22 @@
 <%= render 'layouts/rs_aside_mainSideBar' %>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <%= render 'layouts/rs_topglobaltabs' %>
-    
+    <div class="row">
+     <div class="col-md-3">
+      <section class="content-header">
+      <h1>
+        INVITES
+      </h1>
+      <ol class="breadcrumb" style="display: none;">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+    </div>
+      <div class="col-md-9">
+        <%= render 'layouts/rs_topglobaltabs_2' %>
+      </div>
+      </div>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -46,21 +58,32 @@
       <div class="modal-body">
         <%= simple_form_for Invite.new do |f| %>
           <%= f.error_notification %>
-
-          <div class="form-inputs">
-            <%= f.input :fname %>
-            <%= f.input :lname %>
-            <%= f.input :email %>
+          <div class="form-group">
+            <label for="inputName" class="col-sm-2 control-label">First Name</label>
+          <div class="col-sm-10">
+              <%= f.text_field :fname, autofocus: true, class: "form-control" %><br />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputName" class="col-sm-2 control-label">Last Name</label>
+          <div class="col-sm-10">
+              <%= f.text_field :lname, autofocus: true, class: "form-control" %><br />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputName" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+              <%= f.text_field :email, autofocus: true, class: "form-control" %><br />
+            </div>
           </div>
 
-          <%= f.hidden_field :sender_id, value: current_user.id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
           <%= f.hidden_field :token, value: @form_auth_token %>
 
           <div class="modal-footer">
             <%= f.button :submit, class: "btn btn-primary" %>
           </div>
         <% end %>
-
       </div>
       <div class="modal-footer" style="display: none;">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -76,30 +99,34 @@
             <div class="box-header">
               <h3 class="box-title">Pending Invites</h3>
 
-
+<%= will_paginate @feedbacks %>
 <table class="table table-striped">
     <tr>
       <th>First Name</th>
-      <th>Lowell Fortune</th>
+      <th>Last Name</th>
       <th>Email</th>
       <th>Sender</th>
       <th colspan="3"></th>
     </tr>
 
     <% @invites.each do |invite| %>
+      <% invite.user_id %>
+      <% if invite.user_id == current_user.id %>
       <tr>
         <td><%= invite.fname %></td>
         <td><%= invite.lname %></td>
         <td><%= invite.email %></td>
-        <td><%= invite.sender_id %></td>
+        <td><%= invite.user_id %></td>
         <td><%= link_to 'Show', invite %></td>
         <td><%= link_to 'Edit', edit_invite_path(invite) %></td>
         <td><%= link_to invite, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-xs" do %>
               <i class="fa fa-times-circle"></i></td>
           <% end %>
       </tr>
+      <% end %>
     <% end %>
 </table>
+<%= will_paginate @feedbacks %>
 <br>
 </div>
 </div>

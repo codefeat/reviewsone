@@ -32,6 +32,16 @@ class MyMailer < Devise::Mailer
   		mail(:to => "#{@invite.email}>", from: "lowellfortune@gmail.com", subject: "Follow Up!")
   	end
 
+  	def new_poor_review(poor_review)
+
+  		@poor_review = poor_review
+  		
+  		@thisUser = User.find(@poor_review.user_id)
+  		
+  		@userEmail =@thisUser.email
+  		mail(:to => "#{@userEmail}>", from: "#{@poor_review.email}", subject: "Poor Review")
+  	end
+
 
 
 end

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   
+  resources :review_statuses
+  resources :poor_reviews
+  resources :profile_links
+  resources :links
+  resources :profile_reviews
   resources :invitees
   resources :invites
   resources :promos
@@ -7,6 +12,8 @@ Rails.application.routes.draw do
 
 
   get 'appointments/new' 
+
+  get 'businesses/review' => 'businesses#index'
 
   get 'paqs/address'
 
@@ -46,6 +53,10 @@ Rails.application.routes.draw do
 
   get 'paqs/step8'
 
+  get 'profile_reviews/index'
+ 
+  get 'profile_links/:lid/create' => 'profile_links#new'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: { registrations: "registrations" }
@@ -61,9 +72,13 @@ Rails.application.routes.draw do
   resources :schedules 
   
   resources :subscriptions
-  get 'subscriptions/:id/pay' => 'subscriptions#pay'
+  #get 'subscriptions/:id/pay' => 'subscriptions#pay'
+
+  #get 'subscriptions/:sid/pay' => 'subscriptions#pay'
     #get '/schedules/:id/pay' => 'subscriptions#pay'
     #get 'subscriptions/:id/scheduled' => ''
+
+  get 'subscriptions/pay' => 'subscriptions#pay'
 
     #match 'subscriptions/:id/pay' => 'subscriptions#pay', via: [:get, :post], :as => :subpay
   devise_scope :user do 
@@ -76,9 +91,17 @@ Rails.application.routes.draw do
 
   get 'companies/contact'
 
-  get 'companies/index'
+  get 'companies/:cname/review' => 'companies#index'
 
   get 'companies/spotberry'
+
+  get 'companies/new'
+
+  get 'companies/reviewssos/howto/intro' => 'companies#intro'
+
+  get 'companies/reviewssos/howto/intro2' => 'companies#intro2'
+
+  get 'companies/reviewssos/howto/intro3' => 'companies#intro3'
 
   get 'invites/index'
 
@@ -100,7 +123,9 @@ Rails.application.routes.draw do
 
   #get 'orders#index'
 
-  root 'deliveries#index'
+  #root 'deliveries#index'
+
+  root 'users#index'
   #root 'pages#about'
 
   # The priority is based upon order of creation: first created -> highest priority.
